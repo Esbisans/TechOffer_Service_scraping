@@ -3,7 +3,7 @@ const browserObject = require('./browser');
 const scraperController = require('./pageController');
 const cors = require('cors')
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT;
 const app = express();
 
 app.use(cors());
@@ -29,7 +29,7 @@ app.get("/:string" , async (req, res) => {
 })
 
 
-app.listen(3003, () => {
+app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT)
 } )
 
