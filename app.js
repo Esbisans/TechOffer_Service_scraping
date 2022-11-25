@@ -18,7 +18,7 @@ app.get("/" ,async (req, res) => {
     const mediumData = new Promise((resolve, reject) => {
         scraper.scrapeMedium().then(data => {
             resolve(data)
-        }).catch(err => reject('Medium scrape failed error: ', err))
+        }).catch(err => reject('Medium scrape failed error fall ', err))
     })  
     
     Promise.all([mediumData]).then(data => {
