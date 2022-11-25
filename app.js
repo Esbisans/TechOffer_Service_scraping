@@ -1,6 +1,9 @@
 const express = require("express");
 const browserObject = require('./browser');
 const scraperController = require('./pageController');
+
+const scraper = require('./scrapering');
+
 const cors = require('cors')
 require('dotenv').config();
 
@@ -11,14 +14,19 @@ app.use(cors());
 
 app.get("/" ,async (req, res) => {
     //res.send('Scraping to amazon');
-    const browserInstance = await browserObject.startBrowser();
-    const response = await scraperController.scrapeAll(browserInstance, 'laptop acer')
-    res.json(response)
-    console.log("response: ", response)
+
+    const mediumData = new Promise((resolve, reject) => {
+        scraper.scrapeMedium().then(data => {
+            resolve(data)
+        }).catch(err => reject('Medium scrape failed'))
+    })  
     
+    Promise.all([mediumData]).then(data => {
+        res.send(data)
+    }).catch(err => res.status(500).send(err))
 
 })
-
+/*
 app.get("/:string" , async (req, res) => {
 
     const searchString = req.params.string;
@@ -29,7 +37,7 @@ app.get("/:string" , async (req, res) => {
     console.log("response: ", response)
     res.json(response)
 })
-
+*/
 
 app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT)
