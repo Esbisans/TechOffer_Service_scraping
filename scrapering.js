@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 
 const scrapeMedium = async () => {
-
+    console.log("inicializando......");
     const browser = await puppeteer.launch({
         headless: true,
         args: [
@@ -9,6 +9,7 @@ const scrapeMedium = async () => {
             '--disable-setuid-sandbox',
           ],
     });
+    console.log("Opening the browser......");
     const page = await browser.newPage()
     await page.goto('https://www.amazon.com.mx/')
 
