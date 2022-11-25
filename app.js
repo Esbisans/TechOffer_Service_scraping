@@ -14,7 +14,7 @@ app.use(cors());
 
 app.get("/" ,async (req, res) => {
     //res.send('Scraping to amazon');
-
+    console.log("inicio get")
     const mediumData = new Promise((resolve, reject) => {
         scraper.scrapeMedium().then(data => {
             resolve(data)
