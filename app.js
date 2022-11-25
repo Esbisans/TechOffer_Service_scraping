@@ -26,7 +26,7 @@ app.get("/" ,async (req, res) => {
     }).catch(err => res.status(500).send(err))
 
 })
-/*
+
 app.get("/:string" , async (req, res) => {
 
     const searchString = req.params.string;
