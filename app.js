@@ -14,7 +14,6 @@ app.use(cors());
 
 app.get("/" ,async (req, res) => {
     //res.send('Scraping to amazon');
-    console.log("inicio get")
     const mediumData = new Promise((resolve, reject) => {
         scraper.scrapeMedium().then(data => {
             resolve(data)
@@ -23,6 +22,7 @@ app.get("/" ,async (req, res) => {
     
     Promise.all([mediumData]).then(data => {
         res.send(data)
+        console.log(data)
     }).catch(err => res.status(500).send(err))
 
 })
