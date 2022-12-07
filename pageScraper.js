@@ -8,7 +8,7 @@ const scraperObject = {
         try {
             await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             console.log(`wait for .nav-input`);
-            await page.waitForSelector('.nav-input');
+            //await page.waitForSelector('.nav-input');
             await page.type('.nav-input', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
