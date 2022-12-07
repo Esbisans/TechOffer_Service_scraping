@@ -8,7 +8,7 @@ async function startBrowser(){
 	    //    headless: false,
 	
 	    	args: ['--no-sandbox', '--disable-setuid-sandbox'],
-	//        'ignoreHTTPSErrors': true
+	    //	'ignoreHTTPSErrors': true
 	    });
 	} catch (err) {
 	    console.log("Could not create a browser instance => : ", err);

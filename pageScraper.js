@@ -7,9 +7,11 @@ const scraperObject = {
 
         try {
             await page.goto(this.url);
+            console.log(`wait for .nav-input`);
             await page.waitForSelector('.nav-input');
             await page.type('.nav-input', searchString);
             await page.keyboard.press('Enter');
+            console.log(`Searching to ${searchString}...`);
             await page.waitForNavigation();
             //await page.waitForSelector('.s-card-container');
             await page.click('.a-section.a-spacing-base');
@@ -18,11 +20,13 @@ const scraperObject = {
             let dataObj = {};
             //dataObj['name'] = await page.$eval('.centerColAlign > .celwidget > .a-section > h1 > span', text => text.textContent);
             dataObj['store'] = 'Amazon';
+            dataObj['url'] = await page.$eval('link[rel="canonical"]', link => link.href);
             dataObj['name'] = await page.$eval('#productTitle', text => text.textContent);
-            dataObj['price'] = await page.$eval('.a-price > .a-offscreen', text => text.textContent);
+            dataObj['price'] = await page.$eval('.a-section > .a-price > .a-offscreen', text => text.textContent);
             dataObj['image'] = await page.$eval('#landingImage', img => img.src);
+
             
-    /*    
+            /*    
             let dataObj = {};
             dataObj['name'] = await page.$eval('.s-card-container > .a-section > .a-section > .a-section > h2 > a > span', text => text.textContent);
             dataObj['price'] = await page.$eval('.s-card-container > .a-section > .a-section > .a-section > .a-row > a > .a-price > .a-offscreen', text => text.textContent);
