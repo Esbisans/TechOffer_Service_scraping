@@ -6,7 +6,7 @@ const scraperObject = {
 		console.log(`Navigating to ${this.url}...`);
 
         try {
-            await page.goto(this.url);
+            await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             console.log(`wait for .nav-input`);
             await page.waitForSelector('.nav-input');
             await page.type('.nav-input', searchString);
