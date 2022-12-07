@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 
 app.get("/" ,async (req, res) => {
-    res.send('Scraping to amazon');
+    res.send('Scraping to amazon v1.2');
     /*
     const mediumData = new Promise((resolve, reject) => {
         scraper.scrapeMedium().then(data => {
