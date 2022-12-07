@@ -2,7 +2,7 @@ const scraperObject = {
 	url: 'https://www.amazon.com.mx/',
 	async scraper(browser, searchString){
 		const page = await browser.newPage();
-        await page.setDefaultTimeout(70000);
+        await page.setDefaultTimeout(60000);
 		console.log(`Navigating to ${this.url}...`);
 
         try {
