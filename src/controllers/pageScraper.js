@@ -13,8 +13,7 @@ const scraperObject = {
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
             await page.waitForNavigation();
-            //await page.waitForSelector('.s-card-container');
-            await page.click('.a-section.a-spacing-base');
+            await page.click('.a-section > .s-image');
             console.log(`navigating to .a-section.a-spacing-base`);
             await page.waitForNavigation();
     
