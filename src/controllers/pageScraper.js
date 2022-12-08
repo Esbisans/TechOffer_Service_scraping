@@ -15,6 +15,7 @@ const scraperObject = {
             await page.waitForNavigation();
             //await page.waitForSelector('.s-card-container');
             await page.click('.a-section.a-spacing-base');
+            console.log(`navigating to .a-section.a-spacing-base`);
             await page.waitForNavigation();
     
             let dataObj = {};
@@ -33,7 +34,7 @@ const scraperObject = {
             //console.log(dataObj);
     */        
             await page.close();
-            await browser.close();
+            //await browser.close();
 
             return dataObj;
             

@@ -1,11 +1,9 @@
-const express = require("express");
-const browserObject = require('./browser');
-const scraperController = require('./pageController');
-
-//const scraper = require('./scrapering');
-
+const express = require('express');
+const indexRouter = require('./src/routes/index-router');
+const amazonRouter = require('./src/routes/amazon-router');
+const mercadoRouter = require('./src/routes/mercado-router');
 const cors = require('cors');
-const { json } = require("express");
+
 require('dotenv').config();
 
 const PORT = process.env.PORT;
@@ -13,6 +11,7 @@ const app = express();
 
 app.use(cors());
 
+/*
 app.get("/" ,async (req, res) => {
     res.send('Scraping to amazon v1.2');
     /*
@@ -26,25 +25,31 @@ app.get("/" ,async (req, res) => {
         res.send(data)
         console.log(data)
     }).catch(err => res.status(500).send(err))
-    */
+    /
 })
 
 app.get("/:string" , async (req, res) => {
 
-    //try{
+
         const searchString = req.params.string;
         const browserInstance = await browserObject.startBrowser();
+
         const response = await scraperController.scrapeAll(browserInstance, searchString)
+
         console.log("respuesta: ", response)
         res.json(JSON.parse(response))
-    //}catch(error){
-    //    res.send(error)
-    //}
 
 })
 
+*/
+
+//////////////7
+app.use('/', indexRouter);
+app.use('/amazon', amazonRouter);
+app.use('/mercado', mercadoRouter);
+
 
 app.listen(PORT, () => {
-    console.log("servicio corriendo en puerto: ", PORT)
+    console.log("servicio corriendo en puerto: ", PORT);
 } )
 
