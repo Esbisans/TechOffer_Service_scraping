@@ -48,7 +48,6 @@ app.use('/', indexRouter);
 app.use('/amazon', amazonRouter);
 app.use('/mercado', mercadoRouter);
 
-
 app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT);
 } )

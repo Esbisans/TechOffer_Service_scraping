@@ -1,0 +1,63 @@
+# version: 0.2
+# phases:
+#   install:
+#     runtime-versions:
+#       nodejs: 12
+#     commands:
+#       - echo Installing Mocha...
+#       - npm install -g mocha
+#   pre_build:
+#     commands:
+#       - echo Installing source NPM dependencies...
+#       - npm install
+#       - npm install unit.js
+#   build:
+#     commands:
+#       - echo Build started on `date`
+#       - echo Compiling the Node.js code
+#       - npm run dev
+#   post_build:
+#     commands:
+#       - echo Build completed on `date`
+# # Include only the files required for your application to run.
+# artifacts:
+#   files:
+#     - app.js
+#     - package.json
+#     - node_modules/**/*
+
+
+version: 0.2
+
+
+phases:
+  pre_build:
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+      - npm install unit.js
+      - echo Logging in to Amazon ECR...
+      - aws --version
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=901845911494.dkr.ecr.us-east-1.amazonaws.com/techoffer-scraping
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...
+      - docker build -t $REPOSITORY_URI:1.0 .
+      - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker images...
+      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:$IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"api-centros-de-lavado","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
+    - target/rmnd.jar
