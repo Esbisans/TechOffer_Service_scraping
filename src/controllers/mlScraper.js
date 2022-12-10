@@ -13,8 +13,10 @@ const scraperMl = {
             await page.type('.nav-search-input', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
-            await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 0});
 
+            //await page.waitForNavigation({waitUntil: 'networkidle2', timeout: 0});
+
+            await page.waitForSelector('.andes-card');
             await page.click('.andes-card');
             console.log(`navigating to .andes-card`);
             await page.waitForSelector('.ui-pdp');
