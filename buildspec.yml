@@ -54,7 +54,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - sudo dockerd
+      - docker --version
       - docker build -t $REPOSITORY_URI:1.0 .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
