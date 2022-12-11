@@ -1,4 +1,4 @@
-const walmartScraper = require('../controllers/walmartScraper');
+const liverpoolScraper = require('./liverpoolScraper');
 
 async function scrapeAll(browserInstance, searchString){
 	let browser;
@@ -6,12 +6,12 @@ async function scrapeAll(browserInstance, searchString){
 	try{
 		browser = await browserInstance;
 
-		const scrapedDataWalmart = await walmartScraper.scraper(browser, searchString);
+		const scrapedDataLiverpool = await liverpoolScraper.scraper(browser, searchString);
 
         await browser.close();
 
-		console.log(scrapedDataWalmart);
-		json = JSON.stringify(scrapedDataWalmart);
+		console.log(scrapedDataLiverpool);
+		json = JSON.stringify(scrapedDataLiverpool);
 
 	}
 	catch(err){

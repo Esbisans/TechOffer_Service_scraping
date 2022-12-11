@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const browserObject = require('../controllers/browser');
-const scraperController = require('../controllers/walmartController');
+const scraperController = require('../controllers/liverpoolController');
 
 router.get("/:string" , async (req, res) => {
 

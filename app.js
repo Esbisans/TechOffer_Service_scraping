@@ -2,7 +2,7 @@ const express = require('express');
 const indexRouter = require('./src/routes/index-router');
 const amazonRouter = require('./src/routes/amazon-router');
 const mercadoRouter = require('./src/routes/mercado-router');
-const walmartRouter = require('./src/routes/walmarth-router')
+const liverpoolRouter = require('./src/routes/liverpool-router')
 const cors = require('cors');
 
 require('dotenv').config();
@@ -47,7 +47,7 @@ app.get("/:string" , async (req, res) => {
 app.use('/', indexRouter);
 app.use('/amazon', amazonRouter);
 app.use('/mercado', mercadoRouter);
-app.use('/walmart', walmartRouter);
+app.use('/liverpool', liverpoolRouter);
 
 app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT);

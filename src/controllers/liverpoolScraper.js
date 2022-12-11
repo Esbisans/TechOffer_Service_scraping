@@ -1,4 +1,4 @@
-const scraperWalmart = {
+const scraperLiverpool = {
     url: 'https://www.liverpool.com.mx/tienda/home',
     async scraper(browser, searchString){
         const page = await browser.newPage();
@@ -10,7 +10,7 @@ const scraperWalmart = {
             page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36')
             await page.setViewport({ width: 1366, height: 768});
             await page.goto(this.url);
-            console.log(`wait for searchbarinput`);
+            console.log(`wait for #mainSearchbar`);
             while (!(await page.$('#mainSearchbar'))){
                 console.log('#mainSearchbar not found')
                 await page.reload();
@@ -53,4 +53,4 @@ const scraperWalmart = {
     }
 }
 
-module.exports = scraperWalmart;
+module.exports = scraperLiverpool;
