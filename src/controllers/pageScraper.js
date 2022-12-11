@@ -8,17 +8,20 @@ const scraperObject = {
         try {
             //await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             await page.setViewport({ width: 1366, height: 768});
-            await page.goto(this.url, {waitUntil: 'domcontentloaded'});
+            await page.goto(this.url);
 
 
             while (await page.$('#nav-bb-searchbar')){
                 console.log('pagina deprecada')
                 await page.reload();
             }
-            console.log(`wait for nav-input nav-progressive-attribute`);
+            console.log(`wait for nav-input`);
             //await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
-            console.log(await page.content());
-            await page.type('.nav-input.nav-progressive-attribute', searchString);
+            while (!(await page.$('.nav-input'))){
+                console.log('nav-input not found')
+                await page.reload();
+            }
+            await page.type('.nav-input', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
             await page.waitForNavigation();
