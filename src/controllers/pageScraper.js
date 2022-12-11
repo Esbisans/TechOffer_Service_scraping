@@ -15,9 +15,8 @@ const scraperObject = {
                 console.log('pagina deprecada')
                 await page.reload();
             }
-            //console.log(`wait for .nav-input`);
-            await page.waitForNavigation();
-            await page.waitForSelector('.nav-input');
+            console.log(`wait for .nav-input`);
+            //await page.waitForSelector('.nav-input');
             await page.type('.nav-input', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
