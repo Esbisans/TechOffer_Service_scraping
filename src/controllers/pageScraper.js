@@ -15,9 +15,9 @@ const scraperObject = {
                 console.log('pagina deprecada')
                 await page.reload();
             }
-            console.log(`wait for twotabsearchtextbox`);
+            console.log(`wait for nav-input nav-progressive-attribute`);
             //await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
-            await page.type('#twotabsearchtextbox', searchString);
+            await page.type('.nav-input.nav-progressive-attribute', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
             await page.waitForNavigation();
