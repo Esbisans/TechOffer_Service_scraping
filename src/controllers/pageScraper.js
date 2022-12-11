@@ -16,7 +16,7 @@ const scraperObject = {
                 await page.reload();
             }
             console.log(`wait for twotabsearchtextbox`);
-            await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
+            //await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
             await page.type('#twotabsearchtextbox', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
