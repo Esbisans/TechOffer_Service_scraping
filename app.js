@@ -3,6 +3,7 @@ const indexRouter = require('./src/routes/index-router');
 const amazonRouter = require('./src/routes/amazon-router');
 const mercadoRouter = require('./src/routes/mercado-router');
 const walmartRouter = require('./src/routes/walmarth-router')
+const screenshotRouter = require('./src/routes/screenshot-route')
 const cors = require('cors');
 
 require('dotenv').config();
@@ -43,12 +44,13 @@ app.get("/:string" , async (req, res) => {
 })
 
 */
-
 //////////////7
+app.use(express.static('img'))
 app.use('/', indexRouter);
 app.use('/amazon', amazonRouter);
 app.use('/mercado', mercadoRouter);
 app.use('/walmart', walmartRouter);
+app.use('/sreenshot', screenshotRouter);
 
 app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT);

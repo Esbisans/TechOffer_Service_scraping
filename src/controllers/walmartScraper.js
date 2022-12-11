@@ -11,7 +11,11 @@ const scraperWalmart = {
             await page.setViewport({ width: 1366, height: 768});
             await page.goto(this.url);
             console.log(`wait for searchbarinput`);
-            await page.waitForSelector('#mainSearchbar"]');
+            await page.screenshot({
+                path: 'img/screenshot.jpg',
+            });
+            console.log(`sreenshot tomada`);
+            await page.waitForSelector('#mainSearchbar');
             //await page.waitForNavigation();
             await page.type('#mainSearchbar', searchString);
             await page.keyboard.press('Enter');
