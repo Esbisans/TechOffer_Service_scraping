@@ -1,6 +1,7 @@
 const scraperObject = {
 	url: 'https://www.amazon.com.mx/',
 	async scraper(browser, searchString){
+        let deprecated = false;
 		const page = await browser.newPage();
         await page.setDefaultTimeout(60000);
 		console.log(`Navigating to ${this.url}...`);
@@ -9,19 +10,21 @@ const scraperObject = {
             //await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             await page.goto(this.url);
             console.log(`wait for .nav-input`);
-            await page.waitForSelector('.nav-input');
 
-            if (await page.$('.nav-bb-search')){
+            while (await page.$('#nav-bb-searchbar')){
+                console.log('pagina deprecada')
                 await page.reload();
-            } else {
-                await page.type('.nav-input', searchString);
-                await page.keyboard.press('Enter');
-                console.log(`Searching to ${searchString}...`);
-                await page.waitForNavigation();
-                await page.click('.a-section > .s-image');
-                console.log(`navigating to .a-section.a-spacing-base`);
-                await page.waitForNavigation();
             }
+
+            await page.waitForSelector('.nav-input');
+            await page.type('.nav-input', searchString);
+            await page.keyboard.press('Enter');
+            console.log(`Searching to ${searchString}...`);
+            await page.waitForNavigation();
+            await page.click('.a-section > .s-image');
+            console.log(`navigating to .a-section.a-spacing-base`);
+            await page.waitForNavigation();
+
             
             let dataObj = {};
             //dataObj['name'] = await page.$eval('.centerColAlign > .celwidget > .a-section > h1 > span', text => text.textContent);
