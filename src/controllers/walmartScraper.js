@@ -9,7 +9,7 @@ const scraperWalmart = {
         try {
             page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36')
             await page.setViewport({ width: 1366, height: 768});
-            await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
+            await page.goto(this.url);
             console.log(`wait for searchbarinput`);
             await page.waitForSelector('#mainSearchbar"]');
             //await page.waitForNavigation();
