@@ -45,12 +45,10 @@ app.get("/:string" , async (req, res) => {
 
 */
 //////////////7
-app.use(express.static('public'))
 app.use('/', indexRouter);
 app.use('/amazon', amazonRouter);
 app.use('/mercado', mercadoRouter);
 app.use('/walmart', walmartRouter);
-app.use('/sreenshot', screenshotRouter);
 
 app.listen(PORT, () => {
     console.log("servicio corriendo en puerto: ", PORT);
