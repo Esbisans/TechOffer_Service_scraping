@@ -8,7 +8,7 @@ const scraperObject = {
         try {
             //await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             await page.setViewport({ width: 1366, height: 768});
-            await page.goto(this.url);
+            await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
 
 
             while (await page.$('#nav-bb-searchbar')){
