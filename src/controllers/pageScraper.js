@@ -8,7 +8,7 @@ const scraperObject = {
         try {
             //await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             await page.setViewport({ width: 1366, height: 768});
-            await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
+            await page.goto(this.url, {waitUntil: 'networkidle0', timeout: 0});
 
 
             while (await page.$('#nav-bb-searchbar')){
@@ -16,7 +16,7 @@ const scraperObject = {
                 await page.reload();
             }
             console.log(`wait for twotabsearchtextbox`);
-            await page.waitForSelector('#twotabsearchtextbox');
+            await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
             await page.type('#twotabsearchtextbox', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
