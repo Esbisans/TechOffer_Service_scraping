@@ -8,7 +8,7 @@ const scraperObject = {
         try {
             //await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
             await page.setViewport({ width: 1366, height: 768});
-            await page.goto(this.url, {waitUntil: 'networkidle0', timeout: 0});
+            await page.goto(this.url, {waitUntil: 'networkidle2', timeout: 0});
 
 
             while (await page.$('#nav-bb-searchbar')){
@@ -17,6 +17,7 @@ const scraperObject = {
             }
             console.log(`wait for nav-input nav-progressive-attribute`);
             //await page.waitForSelector('#twotabsearchtextbox', {waitUntil: 'networkidle0', timeout: 0});
+            console.log(await page.content());
             await page.type('.nav-input.nav-progressive-attribute', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
