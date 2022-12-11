@@ -33,29 +33,20 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - apt-get update
-      - apt-get install -yq gconf-service libasound2 libatk1.0-0 libc6 libcairo2
-        libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4
-        libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0
-        libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1
-        libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1
-        libxss1 libxtst6 ca-certificates fonts-liberation libnss3 lsb-release
-        xdg-utils wget
       - echo Installing source NPM dependencies...
       - npm install
       - npm install unit.js
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 901845911494.dkr.ecr.us-east-1.amazonaws.com/techoffer-scraping
-      - REPOSITORY_URI=901845911494.dkr.ecr.us-east-1.amazonaws.com/techoffer-scraping
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - REPOSITORY_URI=750451290759.dkr.ecr.us-east-1.amazonaws.com/api-centros-de-lavado
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker --version
-      - docker build -t $REPOSITORY_URI:1.0 .
+      - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
