@@ -45,7 +45,7 @@ app.get("/:string" , async (req, res) => {
 
 */
 //////////////7
-app.use(express.static('img'))
+app.use(express.static('public'))
 app.use('/', indexRouter);
 app.use('/amazon', amazonRouter);
 app.use('/mercado', mercadoRouter);
