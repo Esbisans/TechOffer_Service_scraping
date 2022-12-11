@@ -34,6 +34,7 @@ phases:
   pre_build:
     commands:
       - echo Installing source NPM dependencies...
+      - npm i -D @types/node
       - npm install
       - npm install unit.js
       - echo Logging in to Amazon ECR...
