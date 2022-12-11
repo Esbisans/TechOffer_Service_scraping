@@ -17,7 +17,7 @@ const scraperObject = {
             }
             console.log(`wait for .nav-input`);
             //await page.waitForSelector('.nav-input');
-            await page.type('.nav-input', searchString);
+            await page.type('input.nav-input', searchString);
             await page.keyboard.press('Enter');
             console.log(`Searching to ${searchString}...`);
             await page.waitForNavigation();
