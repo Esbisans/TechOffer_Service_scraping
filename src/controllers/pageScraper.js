@@ -10,16 +10,22 @@ const scraperObject = {
             await page.goto(this.url);
             console.log(`wait for .nav-input`);
             await page.waitForSelector('.nav-input');
-            await page.type('.nav-input', searchString);
-            await page.keyboard.press('Enter');
-            console.log(`Searching to ${searchString}...`);
-            await page.waitForNavigation();
-            await page.click('.a-section > .s-image');
-            console.log(`navigating to .a-section.a-spacing-base`);
-            await page.waitForNavigation();
-    
+
+            if (await page.$('.nav-bb-search')){
+                await page.reload();
+            } else {
+                await page.type('.nav-input', searchString);
+                await page.keyboard.press('Enter');
+                console.log(`Searching to ${searchString}...`);
+                await page.waitForNavigation();
+                await page.click('.a-section > .s-image');
+                console.log(`navigating to .a-section.a-spacing-base`);
+                await page.waitForNavigation();
+            }
+            
             let dataObj = {};
             //dataObj['name'] = await page.$eval('.centerColAlign > .celwidget > .a-section > h1 > span', text => text.textContent);
+            dataObj['status'] = true;
             dataObj['store'] = 'Amazon';
             dataObj['url'] = await page.$eval('link[rel="canonical"]', link => link.href);
             dataObj['name'] = await page.$eval('#productTitle', text => text.textContent);
@@ -40,6 +46,7 @@ const scraperObject = {
             
         } catch (error) {
             let errorObj ={}
+            errorObj['status'] = false;
             errorObj['title'] = 'Error on navigation';
             errorObj['error'] = error;
             return errorObj
