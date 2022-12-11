@@ -42,6 +42,7 @@ phases:
         xdg-utils wget
       - sudo amazon-linux-extras install epel -y
       - sudo yum install -y chromium
+      - node --version
       - echo Installing source NPM dependencies...
       - npm install
       - npm install unit.js
