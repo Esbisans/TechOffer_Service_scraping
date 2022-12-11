@@ -3,7 +3,6 @@ const indexRouter = require('./src/routes/index-router');
 const amazonRouter = require('./src/routes/amazon-router');
 const mercadoRouter = require('./src/routes/mercado-router');
 const walmartRouter = require('./src/routes/walmarth-router')
-const screenshotRouter = require('./src/routes/screenshot-route')
 const cors = require('cors');
 
 require('dotenv').config();
