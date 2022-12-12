@@ -9,7 +9,7 @@ async function startBrowser(){
 	
 	    	args: ['--no-sandbox', '--disable-setuid-sandbox'],
 	    //	'ignoreHTTPSErrors': true
-		//	executablePath: '/usr/bin/google-chrome'
+			executablePath: '/usr/bin/google-chrome'
 	    });
 	} catch (err) {
 	    console.log("Could not create a browser instance => : ", err);
